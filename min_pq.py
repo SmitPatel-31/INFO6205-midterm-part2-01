@@ -140,24 +140,21 @@ class MinPQ(Generic[T]):
         return min_element
     
     def _swim(self, k: int):
-        """
-        Move the element at position k up to restore the heap invariant.
-        
-        Args:
-            k: The position of the element to swim
-        """
-        # STUDENT TODO: Implement the swim method
-        pass
+        #  Move the element at position k up to restore the heap invariant.
+        while k > 1 and self._greater(k // 2, k): 
+            self._exch(k, k // 2)  
+            k //= 2  
     
     def _sink(self, k: int):
-        """
-        Move the element at position k down to restore the heap invariant.
-        
-        Args:
-            k: The position of the element to sink
-        """
-        # STUDENT TODO: Implement the sink method
-        pass
+        #  Move the element at position k down to restore the heap invariant.
+        while 2 * k <= self.n:  
+            j = 2 * k  
+            if j < self.n and self._greater(j, j + 1):  
+                j += 1
+            if not self._greater(k, j):  
+                break
+            self._exch(k, j) 
+            k = j 
     
     def _greater(self, i: int, j: int) -> bool:
         """
